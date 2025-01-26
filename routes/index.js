@@ -3,7 +3,7 @@ var router = express.Router();
 
 const tokenRouter = require("./token");
 
-router.get("/", () => {
+router.get("/", (req, res) => {
     res.send("Welcome to the ExpressJS!");
 });
 router.use(tokenRouter);
