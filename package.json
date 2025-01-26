@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "build": "tsc",
-    "vercel-build": "echo 'Halo'"
+    "build": "npm run vercel-build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
