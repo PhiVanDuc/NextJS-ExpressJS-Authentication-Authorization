@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "build": "echo 'No build step required for Express.js'"
+    "build": "echo 'No build step required for Express.js'",
+    "vercel-build": "echo Hello"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
