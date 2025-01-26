@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "build": "echo 'No build step required for Express.js'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
