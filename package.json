@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "tsc",
+    "vercel-build": "echo 'Halo'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
