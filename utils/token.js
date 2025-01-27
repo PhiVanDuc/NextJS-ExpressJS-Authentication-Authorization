@@ -11,5 +11,33 @@ module.exports = {
                 expiresIn: time
             }
         )
+    },
+    verify_token: (token) => {
+        try {
+            const verify = jwt.verify(
+                token,
+                TOKEN_KEY,
+            );
+
+            return {
+                success: true,
+                verify
+            };
+        }
+        catch(error) {
+            console.log("Error during token verification:", error);
+            if (error.name === 'TokenExpiredError') {
+                return {
+                    success: false,
+                    expired: true,
+                    message: 'Token has expired',
+                };
+            }
+            return {
+                success: false,
+                expired: false,
+                message: error.message,
+            };
+        }
     }
 }
