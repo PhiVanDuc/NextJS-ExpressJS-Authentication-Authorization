@@ -6,8 +6,8 @@ module.exports = {
             const authorization = req.headers["authorization"] || req.headers["Authorization"];
             if (!authorization || !authorization?.startsWith("Bearer ")) {
                 return res.status(401).json({
-                    file: "auth.middleware.js",
-                    message: "UNAUTHORIZED: Missing or invalid authorization header"
+                    success: false,
+                    message: "Chưa xác thực: Thiếu hoặc authorization headers không đúng định dạng!"
                 });
             }
 
@@ -17,13 +17,13 @@ module.exports = {
             if (!verifyAccessToken.success) {
                 if (verifyAccessToken.expired) {
                     return res.status(410).json({
-                        file: "auth.middleware.js",
-                        message: "UNAUTHORIZED: Token expired",
+                        success: false,
+                        message: "Chưa xác thực: access token hết hạn!"
                     });
                 } else {
                     return res.status(401).json({
-                        file: "auth.middleware.js",
-                        message: "UNAUTHORIZED: Invalid token",
+                        success: false,
+                        message: "Chưa xác thực: access token không đúng định dạng!",
                     });
                 }
             }

@@ -1,60 +1,65 @@
 const { create_token, verify_token } = require("../utils/token");
 
 module.exports = {
-    login: (req, res) => {
+    signIn: (req, res) => {
         try {
             const data = req.body;
             if (!data?.payload || !data?.time) {
                 return res.status(400).json({
-                    file: "token.controller.js",
                     success: false,
-                    message: "Missing data!"
+                    message: "Thiếu dữ liệu truyền lên!"
                 });
             }
 
             const accessToken = create_token(data.payload, data.time);
-            const refreshToken = create_token({}, "7d");
+            const refreshToken = create_token({}, "1h");
 
             return res.status(200).json({
-                accessToken,
-                refreshToken
+                success: true,
+                message: "Đăng nhập thành công!",
+                data: { accessToken, refreshToken }
             });
         }
         catch(error) {
             return res.status(500).json({
-                file: "token.controller.js",
                 success: false,
                 message: error.message,
             });
         }
     },
 
-    refresh_access_token: async (req, res) => {
+    refresh: async (req, res) => {
         try {
             const data = req.body;
             if (!data?.payload || !data?.time) {
                 return res.status(400).json({
-                    file: "token.controller.js",
-                    message: "Missing data!"
+                    success: false,
+                    message: "Thiếu dữ liệu truyền lên!"
                 });
             }
 
-            const resfreshToken = req?.cookies?.refreshToken;
-            if (!resfreshToken || (!verify_token(resfreshToken).success && !verify_token(resfreshToken).expired)) {
+            const resfreshToken = data?.refreshToken;
+            if (!resfreshToken || !verify_token(resfreshToken).success) {
                 return res.status(401).json({
-                    file: "token.controller.js",
-                    message: "Your sign in session is expired!"
+                    success: false,
+                    message: "Chưa xác thực: Phiên đăng nhập đã hết hạn!"
                 })
             }
 
             const accessToken = create_token(data.payload, data.time);
+            const refreshToken = create_token({}, "7d");
+
             return res.status(200).json({
-                accessToken
+                success: true,
+                message: "Đã thành công cấp lại tokens mới!",
+                data: { accessToken, refreshToken }
             });
         }
         catch(error) {
+            console.log(error);
+
             return res.status(500).json({
-                file: "token.controller.js",
+                success: false,
                 message: error.message,
             });
         }

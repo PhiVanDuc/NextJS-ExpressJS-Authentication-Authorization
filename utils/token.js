@@ -25,7 +25,6 @@ module.exports = {
             };
         }
         catch(error) {
-            console.log("Error during token verification:", error);
             if (error.name === 'TokenExpiredError') {
                 return {
                     success: false,

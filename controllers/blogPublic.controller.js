@@ -6,7 +6,7 @@ module.exports = {
 
             return res.status(200).json({
                 success: true,
-                message: "Thàng công lấy ra postes (protected)",
+                message: "Thàng công lấy ra postes (public)",
                 data: { posts },
             });
         }
