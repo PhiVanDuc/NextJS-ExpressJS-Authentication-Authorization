@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
-  origin: "http://localhost:3001",
+  origin: "https://next-js-authentication-authorization.vercel.app",
   credentials: true,
 }));
 
